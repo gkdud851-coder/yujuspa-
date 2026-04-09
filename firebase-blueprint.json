@@ -1,0 +1,89 @@
+{
+  "entities": {
+    "Reservation": {
+      "title": "Reservation",
+      "description": "Details of a spa reservation",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "time": { "type": "string" },
+        "adultsMale": { "type": "number" },
+        "adultsFemale": { "type": "number" },
+        "kidsMale": { "type": "number" },
+        "kidsFemale": { "type": "number" },
+        "courseId": { "type": "string", "enum": ["vip-90", "vip-120"] },
+        "therapistId": { "type": "string" },
+        "pickupAddress": { "type": "string" },
+        "dropoffAddress": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "completed", "cancelled"] },
+        "totalPrice": { "type": "number" },
+        "assignedRoomId": { "type": "string" },
+        "assignedBedIds": { "type": "array", "items": { "type": "string" } },
+        "vehicleInfo": {
+          "type": "object",
+          "properties": {
+            "driverName": { "type": "string" },
+            "driverPhone": { "type": "string" },
+            "vehicleNumber": { "type": "string" },
+            "vehicleImage": { "type": "string" },
+            "dispatchTime": { "type": "string" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["customerName", "date", "time", "courseId", "status"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "Spa room configuration",
+      "type": "object",
+      "properties": {
+        "floor": { "type": "number" },
+        "type": { "type": "string", "enum": ["male", "female", "private", "group"] },
+        "capacity": { "type": "number" },
+        "roomNumber": { "type": "string" }
+      }
+    },
+    "Staff": {
+      "title": "Staff",
+      "description": "Spa staff details",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["therapist", "manager", "driver"] },
+        "photoUrl": { "type": "string" }
+      }
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile and role",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "customer"] }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/reservations/{reservationId}": {
+      "schema": "Reservation",
+      "description": "Customer reservations"
+    },
+    "/rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Room availability and configuration"
+    },
+    "/staff/{staffId}": {
+      "schema": "Staff",
+      "description": "Staff profiles"
+    }
+  }
+}

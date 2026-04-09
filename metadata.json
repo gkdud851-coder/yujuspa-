@@ -1,0 +1,5 @@
+{
+  "name": "Yuju Spa Phu Quoc",
+  "description": "Premium spa reservation system for Yuju Spa Phu Quoc with real-time bed allocation and smart vehicle dispatch.",
+  "requestFramePermissions": ["camera"]
+}
